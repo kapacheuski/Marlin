@@ -1713,6 +1713,13 @@ void prepare_line_to_destination() {
       sensorless_t stealth_states;
     #endif
 
+    //If home direction is zero then don't home this axis
+    if (axis_home_dir == 0){
+      set_axis_is_at_home(axis);
+      sync_plan_position();
+      return;
+    }
+
     if (is_home_dir) {
 
       if (TERN0(HOMING_Z_WITH_PROBE, axis == Z_AXIS)) {

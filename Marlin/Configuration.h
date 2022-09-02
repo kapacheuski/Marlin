@@ -1167,14 +1167,20 @@
  * Override with M92
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_AXIS_STEPS_PER_UNIT   { 200, 200, 200, 8.8888 }
+#define STEPPER_DRIVE_TEETH 16
+#define STEPPPER_DRIVE_TOOTH_PITCH  2.0
+#define STEPPPER_STEPS_PER_ROTATION 200
+#define STEPPER_MICROSTEPPING 32
+#define MACHINE_STEPS_PER_UNIT (()STEPPPER_STEPS_PER_ROTATION * STEPPER_MICROSTEPPING) / (STEPPER_DRIVE_TEETH * STEPPER_DRIVE_TEETH))
+
+#define DEFAULT_AXIS_STEPS_PER_UNIT   { MACHINE_STEPS_PER_UNIT, MACHINE_STEPS_PER_UNIT, MACHINE_STEPS_PER_UNIT, (STEPPPER_STEPS_PER_ROTATION * STEPPER_MICROSTEPPING / 360.0) }
 
 /**
  * Default Max Feed Rate (linear=mm/s, rotational=°/s)
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K...]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 300, 300, 100, 90 }
+#define DEFAULT_MAX_FEEDRATE          { 200, 200, 100, 360 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -1703,8 +1709,8 @@
 #define X_MAX_POS X_BED_SIZE
 #define Y_MAX_POS Y_BED_SIZE
 #define Z_MAX_POS 0
-#define I_MIN_POS -360
-#define I_MAX_POS 360
+#define I_MIN_POS -36000
+#define I_MAX_POS 36000
 //#define J_MIN_POS 0
 //#define J_MAX_POS 50
 //#define K_MIN_POS 0
@@ -2071,7 +2077,7 @@
 //#define MANUAL_X_HOME_POS 0
 //#define MANUAL_Y_HOME_POS 0
 //#define MANUAL_Z_HOME_POS 0
-//#define MANUAL_I_HOME_POS 0
+#define MANUAL_I_HOME_POS 0
 //#define MANUAL_J_HOME_POS 0
 //#define MANUAL_K_HOME_POS 0
 //#define MANUAL_U_HOME_POS 0

@@ -1527,6 +1527,8 @@ static_assert(Y_MAX_LENGTH >= Y_BED_SIZE, "Movement bounds (Y_MIN_POS, Y_MAX_POS
   #error "DIRECT_STEPPING currently requires NUM_AXES 3"
 #elif ENABLED(FOAMCUTTER_XYUV) && NUM_AXES < 5
   #error "FOAMCUTTER_XYUV requires NUM_AXES >= 5."
+#elif ENABLED(PNP_XYZA) && NUM_AXES != 4
+  #error "PNP_XYZA requires NUM_AXES = 4."
 #elif ENABLED(LINEAR_ADVANCE) && HAS_I_AXIS
   #error "LINEAR_ADVANCE currently requires NUM_AXES <= 3."
 #endif

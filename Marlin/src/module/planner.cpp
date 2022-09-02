@@ -1785,10 +1785,10 @@ float Planner::get_axis_position_mm(const AxisEnum axis) {
   return axis_steps * mm_per_step[axis];
 }
 
+void Planner::synchronize() { while (busy()) idle(); }
 /**
  * Block until the planner is finished processing
  */
-void Planner::synchronize() { while (busy()) idle(); }
 
 /**
  * @brief Add a new linear movement to the planner queue (in terms of steps).

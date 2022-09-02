@@ -120,6 +120,15 @@
     #define Z_MAX_PIN                         19
   #endif
 #endif
+//TODO REMOVE THIS HACK
+#ifndef I_STOP_PIN
+  #ifndef I_MIN_PIN
+    #define I_MIN_PIN                         X_MIN_PIN
+  #endif
+  #ifndef I_MAX_PIN
+    #define I_MAX_PIN                         Y_MIN_PIN
+  #endif
+#endif
 
 //
 // Z Probe (when not Z_MIN_PIN)
@@ -158,7 +167,6 @@
   #define Z_CS_PIN                            40
 #endif
 
-
 #ifndef I_STEP_PIN
   #define I_STEP_PIN                          26
 #endif
@@ -173,29 +181,29 @@
 #endif
 
 #ifndef E0_STEP_PIN
-  #define E0_STEP_PIN                         70
+  #define E0_STEP_PIN                         -1
 #endif
 #ifndef E0_DIR_PIN
-  #define E0_DIR_PIN                          70
+  #define E0_DIR_PIN                          -1
 #endif
 #ifndef E0_ENABLE_PIN
-  #define E0_ENABLE_PIN                       70
+  #define E0_ENABLE_PIN                       -1
 #endif
 #ifndef E0_CS_PIN
-  #define E0_CS_PIN                           70
+  #define E0_CS_PIN                           -1
 #endif
 
 #ifndef E1_STEP_PIN
-  #define E1_STEP_PIN                         70
+  #define E1_STEP_PIN                         -1
 #endif
 #ifndef E1_DIR_PIN
-  #define E1_DIR_PIN                          70
+  #define E1_DIR_PIN                          -1
 #endif
 #ifndef E1_ENABLE_PIN
-  #define E1_ENABLE_PIN                       70
+  #define E1_ENABLE_PIN                       -1
 #endif
 #ifndef E1_CS_PIN
-  #define E1_CS_PIN                           70
+  #define E1_CS_PIN                           -1
 #endif
 
 //

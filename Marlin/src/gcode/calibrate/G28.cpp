@@ -450,9 +450,10 @@ void GcodeSuite::G28() {
       #endif
     }
 
-    #if BOTH(FOAMCUTTER_XYUV, HAS_I_AXIS)
-      // Home I (after X)
-      if (doI) homeaxis(I_AXIS);
+
+    #if BOTH(, HAS_I_AXIS)
+      set_axis_is_at_home(I_AXIS);
+      sync_plan_position();
     #endif
 
     // Home Y (after X)
@@ -464,11 +465,23 @@ void GcodeSuite::G28() {
       if (doJ) homeaxis(J_AXIS);
     #endif
 
+    // #if ENABLED(PNP_XYZA)
+    //   // skip homing of unused I axis (rotation) for pick n place machines
+    //   SECONDARY_AXIS_CODE(
+    //     if (doI) {
+    //       set_axis_is_at_home(I_AXIS);
+    //       sync_plan_position();
+    //     }
+    //   )
+    // #endif
+
     TERN_(IMPROVE_HOMING_RELIABILITY, end_slow_homing(saved_motion_state));
 
     #if ENABLED(FOAMCUTTER_XYUV)
       // skip homing of unused Z axis for foamcutters
       if (doZ) set_axis_is_at_home(Z_AXIS);
+    // #elif ENABLED(PNP_XYZA)
+    //   if (doI) set_axis_is_at_home(I_AXIS);
     #else
       // Home Z last if homing towards the bed
       #if HAS_Z_AXIS && DISABLED(HOME_Z_FIRST)

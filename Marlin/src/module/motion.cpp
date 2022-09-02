@@ -1695,6 +1695,25 @@ void prepare_line_to_destination() {
 
     const feedRate_t home_fr_mm_s = fr_mm_s ?: homing_feedrate(axis);
 
+    //Special case for PNP I_AXIS that should not be homed
+    #if ENABLED(PNP_XYZA)
+      if (axis == I_AXIS){
+          // Get the ABC or XYZ positions in mm
+        abce_pos_t target = planner.get_axis_positions_mm();
+
+        target[axis] = 0;                         // Set the single homing axis to 0
+        planner.set_machine_position_mm(target);  // Update the machine position
+
+        // Set delta/cartesian axes directly
+        target[axis] = 0;                         // Move nowhere
+        planner.buffer_segment(target OPTARG(HAS_DIST_MM_ARG, cart_dist_mm), home_fr_mm_s, active_extruder);
+        planner.synchronize();
+        set_axis_is_at_home(axis);
+        sync_plan_position();
+        return;
+      }
+    #endif
+
     if (DEBUGGING(LEVELING)) {
       DEBUG_ECHOPGM("...(", AS_CHAR(AXIS_CHAR(axis)), ", ", distance, ", ");
       if (fr_mm_s)
@@ -1712,13 +1731,6 @@ void prepare_line_to_destination() {
     #if ENABLED(SENSORLESS_HOMING)
       sensorless_t stealth_states;
     #endif
-
-    //If home direction is zero then don't home this axis
-    if (axis_home_dir == 0){
-      set_axis_is_at_home(axis);
-      sync_plan_position();
-      return;
-    }
 
     if (is_home_dir) {
 

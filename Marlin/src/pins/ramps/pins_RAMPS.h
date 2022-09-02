@@ -31,7 +31,6 @@
  *  RAMPS_14_EFF (Hotend, Fan0, Fan1)
  *  RAMPS_14_EEF (Hotend0, Hotend1, Fan)
  *  RAMPS_14_SF  (Spindle, Controller Fan)
- *
  *  RAMPS_13_EFB (Hotend, Fan, Bed)
  *  RAMPS_13_EEB (Hotend0, Hotend1, Bed)
  *  RAMPS_13_EFF (Hotend, Fan0, Fan1)
@@ -101,6 +100,66 @@
   #ifndef J_STOP_PIN
     #define J_STOP_PIN                        19
   #endif
+#endif
+
+#if ENABLED(PNP_XYZA)
+  #ifndef MOSFET_C_PIN
+    #define MOSFET_C_PIN                      -1
+  #endif
+  #ifndef MOSFET_A_PIN
+    #define MOSFET_A_PIN                      -1
+  #endif
+  #ifndef MOSFET_B_PIN
+    #define MOSFET_B_PIN                      -1
+  #endif
+  #ifndef I_STOP_PIN
+    #ifndef I_MIN_PIN
+      #define I_MIN_PIN                       2
+      #define X_MIN_PIN                       -1
+    #endif
+    #ifndef I_MAX_PIN
+      #define I_MAX_PIN                       14
+      #define Y_MIN_PIN                       -1
+    #endif
+  #endif
+  #ifndef J_STOP_PIN
+    #define J_STOP_PIN                        -1
+  #endif
+  #ifndef E0_STOP_PIN
+    #define E0_STOP_PIN                       -1
+  #endif
+  #ifndef E1_STOP_PIN
+    #define E1_STOP_PIN                       -1
+  #endif
+
+  //Rotation stepper AxisI on E0
+  #define I_STEP_PIN                         26
+  #define I_DIR_PIN                          28
+  #define I_ENABLE_PIN                       24
+  #define I_CS_PIN                           42
+
+  // //Rotation stepper AxisI on E1
+  // #define I_STEP_PIN                         36
+  // #define I_DIR_PIN                          34
+  // #define I_ENABLE_PIN                       30
+  // #define I_CS_PIN                           44             
+
+  // //Rotation stepper AxisI on E0 RAMPS1.2
+  // #define I_STEP_PIN                         32
+  // #define I_DIR_PIN                          34
+  // #define I_ENABLE_PIN                       30
+  // #define I_CS_PIN                           42
+
+
+  #define E0_STEP_PIN                         -1
+  #define E0_DIR_PIN                          -1
+  #define E0_ENABLE_PIN                       -1
+  #define E0_CS_PIN                           -1
+
+  #define E1_STEP_PIN                         -1
+  #define E1_DIR_PIN                          -1
+  #define E1_ENABLE_PIN                       -1
+  #define E1_CS_PIN                           -1
 #endif
 
 //

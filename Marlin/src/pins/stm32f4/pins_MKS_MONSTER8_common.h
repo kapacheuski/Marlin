@@ -175,11 +175,18 @@
   #define E2_SERIAL_TX_PIN                  PD0
   #define E2_SERIAL_RX_PIN      E2_SERIAL_TX_PIN
 
-  #define E3_SERIAL_TX_PIN                  PD15
-  #define E3_SERIAL_RX_PIN      E3_SERIAL_TX_PIN
+  // #define E3_SERIAL_TX_PIN                  PD15
+  // #define E3_SERIAL_RX_PIN      E3_SERIAL_TX_PIN
 
-  #define E4_SERIAL_TX_PIN                  PD11
-  #define E4_SERIAL_RX_PIN      E4_SERIAL_TX_PIN
+  // #define E4_SERIAL_TX_PIN                  PD11
+  // #define E4_SERIAL_RX_PIN      E4_SERIAL_TX_PIN
+
+  #define I_SERIAL_TX_PIN                  PD15
+  #define I_SERIAL_RX_PIN      I_SERIAL_TX_PIN
+
+  #define J_SERIAL_TX_PIN                  PD11
+  #define J_SERIAL_RX_PIN      J_SERIAL_TX_PIN
+
 
   // Reduce baud rate to improve software serial reliability
   #ifndef TMC_BAUD_RATE
